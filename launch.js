@@ -3,6 +3,7 @@
    index.html?mode=hen | ?mode=kpstep | ?mode=goldhen   zusaetzlich: &reuse=1 &mem=1..5 */
 (function () {
   var q = new URLSearchParams(location.search);
+  if (q.get("afterglow") === "done") return;
   var mode = q.get("mode") || "hen";
   var payload = q.get("payload") ||
     (mode === "goldhen" ? "goldhen.bin" : mode === "hen" ? "hen.bin" : "");
