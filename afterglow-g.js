@@ -1924,7 +1924,10 @@ async function attempt(ctx, opts) {
      successful run. */
   {
     const m0 = sc(S.mmap, 0, 0x4000, 3, 0x1002, -1, 0);
-    if (m0.i32 !== -1 && sc(S.mprotect, v(m0.lo, m0.hi), 0x4000, 7).i32 === 0) {
+    /* ?reuse=1 skips the bail: the rwx probe also answers yes on a clean
+       kernel when the firmware allows W^X anyway, and then a second run per
+       boot would never happen. */
+    if (ctx.params.get("reuse") !== "1" && m0.i32 !== -1 && sc(S.mprotect, v(m0.lo, m0.hi), 0x4000, 7).i32 === 0) {
       say("  this kernel is already open -- a run has succeeded on this boot.");
       say("  Not firing again; reboot the console for a fresh one.");
       return false;
