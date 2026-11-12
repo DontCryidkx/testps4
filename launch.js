@@ -8,7 +8,7 @@
     (mode === "goldhen" ? "goldhen.bin" : mode === "hen" ? "hen.bin" : "");
   var url = "launch.html?v=1402s&log=1&afterglow=run&mode=" + encodeURIComponent(mode) +
     (payload ? "&payload=" + encodeURIComponent(payload) : "");
-  ["reuse", "mem", "attempts"].forEach(function (k) {
+  ["reuse", "mem", "attempts", "hx1400"].forEach(function (k) {
     var v = q.get(k);
     if (v) url += "&" + k + "=" + encodeURIComponent(v);
   });
